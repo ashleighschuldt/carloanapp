@@ -31,6 +31,7 @@ app.use(session({
 }))
 
 app.post(`/api/auth/login`, auth.login);
+app.post(`/api/auth/register`, auth.register);
 
 const port = process.env.PORT || 5000;
 app.listen(port, ()=>{

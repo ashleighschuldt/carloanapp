@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import Link from 'react-router-dom';
+import {Link} from 'react-router-dom';
+import axios from 'axios';
+import { updateUser } from '../../Redux/actions/action';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -52,4 +54,4 @@ function mapDispatchToProps(dispatch){
     return bindActionCreators({ updateUser }, dispatch);
 }
 
-export default connect (state => state, mapDispatchToProps)(Auth);
+export default connect (state => state, mapDispatchToProps)(Login);

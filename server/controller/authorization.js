@@ -1,3 +1,5 @@
+const mw = require('./middleware')
+
 module.exports = {
     login: (req, res) => {
         const db = app.get('db');
@@ -30,7 +32,7 @@ module.exports = {
                 console.log(req.session.user)
                 res.status(200).send({ success: true, message: 'logged in successfully' });
             })
-            .catch(handleDbError(res));
+            .catch(mw.handleDbError(res));
         }
     
 }
