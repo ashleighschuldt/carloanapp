@@ -1,11 +1,9 @@
-const mw = require('./middleware')
-
 module.exports = {
     login: (req, res) => {
-        const db = app.get('db');
+        const db = req.app.get('db');
         const {username, password} = req.body;
         
-        db.users.findOne({username, password})
+        db.user_table.findOne({ username, password })
             .then( user => {
                 if (!user){
                     return res.status(401).send({success: false, message: 'Login failed'})
@@ -15,7 +13,7 @@ module.exports = {
                 })
         },
     register: (req, res) => {
-        const db = app.get('db');
+        const db = req.app.get('db');
         const { username, password, address, city, state, zip } = req.body;
             
     db.user.createUser({ 
@@ -27,12 +25,17 @@ module.exports = {
         zip: req.body.zip
          
     })
-            .then(user => {
-                req.session.user = users.id;
+            // .then( res => {
+            //     return db.user.getUserbyusername({ username })
+            // })
+            .then(([user]) => {
+                req.session.user = user.id;
                 console.log(req.session.user)
                 res.status(200).send({ success: true, message: 'logged in successfully' });
             })
-            .catch(mw.handleDbError(res));
+            .catch(err => {
+                console.log(err)
+            });
         }
     
 }

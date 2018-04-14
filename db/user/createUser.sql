@@ -1,4 +1,4 @@
-INSERT INTO users (
+INSERT INTO user_table (
     username,
     password,
     address,
@@ -13,3 +13,4 @@ VALUES (
     ${state},
     ${zip}
 )
+RETURNING *
