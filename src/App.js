@@ -9,6 +9,7 @@ import Welcome from './Views/Welcome/Welcome';
 import Dashboard from './Views/Dashboard/Dashboard';
 import Vehicles from './Views/Vehicles/Vehicles';
 import AddVehicle from './Views/AddVehicle/AddVehicle';
+import EditVehicle from './Views/EditVehicle/EditVehicle';
 import Loans from './Views/Loans/Loans';
 import AddLoan from './Views/AddLoan/AddLoan';
 
@@ -22,6 +23,7 @@ class App extends Component {
               <Route path={`/welcome`} component={ Welcome }/>
               <Route path={`/dashboard`} component={ Dashboard }/>
               <Route path={`/vehicles`} component={ Vehicles }/>
+              <Route path={`/editvehicle/:id`} component= {EditVehicle}/>
               <Route path={`/newvehicle`} component={ AddVehicle }/>
               <Route path={`/loan`} component={ Loans }/>
               <Route path={`/newloan`} component={ AddLoan }/>

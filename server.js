@@ -5,6 +5,8 @@ const session = require('express-session');
 const massive = require('massive');
 
 const auth = require('./server/controller/authorization');
+const vehicles = require('./server/controller/vehicles');
+const loans = require('./server/controller/loans');
 
 
 require('dotenv').config();
@@ -33,6 +35,13 @@ app.use(session({
 
 app.post(`/api/auth/login`, auth.login);
 app.post(`/api/auth/register`, auth.register);
+
+app.get(`/api/vehicles`, vehicles.getVehicles);
+app.post(`/api/vehicles`, vehicles.addVehicle);
+app.delete(`/api/vehicles/:id`, vehicles.deleteVehicle);
+app.put(`/api/vehicles/:id`, vehicles.editVehicle);
+
+app.get(`/api/loans`, loans.getLoan);
 
 const port = process.env.PORT || 5000;
 app.listen(port, ()=>{

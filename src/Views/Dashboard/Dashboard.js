@@ -17,7 +17,7 @@ class Dashboard extends Component {
         <Header />
           Dashboard
           <Link to={`/vehicles`}>Vehicles</Link>
-          <Link to={`/loans`}>Loans</Link>
+          <Link to={`/loan`}>Loans</Link>
           <p> You have no saved vehicles or loans. 
             Click on vehicles to get started!</p>
       </div>
