@@ -40,8 +40,9 @@ app.get(`/api/vehicles`, vehicles.getVehicles);
 app.post(`/api/vehicles`, vehicles.addVehicle);
 app.delete(`/api/vehicles/:id`, vehicles.deleteVehicle);
 app.put(`/api/vehicles/:id`, vehicles.editVehicle);
+app.get(`/api/vehicles/:id`, vehicles.getVehicle);
 
-app.get(`/api/loans`, loans.getLoan);
+app.get(`/api/loans`, loans.getLoans);
 
 const port = process.env.PORT || 5000;
 app.listen(port, ()=>{

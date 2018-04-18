@@ -8,6 +8,16 @@ module.exports = {
             .catch(err => {
                 console.log(err)});
     },
+    getVehicle: (req, res) => {
+        const db = req.app.get('db');
+        db.vehicles.getVehicleById({ id: req.params.id })
+            .then(vehicle => {
+                res.status(200).send(vehicle);
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    },
     addVehicle: (req, res) => {
         const db = req.app.get('db');
         db.vehicles.addVehicle({ 

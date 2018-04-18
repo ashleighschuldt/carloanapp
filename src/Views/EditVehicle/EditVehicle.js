@@ -9,19 +9,19 @@ class EditVehicle extends Component {
         this.state = {}
     }
 
-componentWillMount(){
+componentDidMount(){
     axios.get(`/api/vehicles/${this.props.match.params.id}`)
         .then(response => {
             this.setState({
-                vehicle: response.data
-        // name: response.data.name,        
-        // year: response.data.year, 
-        // make: response.data.make,
-        // model: response.data.model,
-        // trim: response.data.trim,
-        // tradein_value: response.data.tradein_value,
-        // private_sale_value: response.data.private_sale_value,
-        // payoff: response.data.payoff
+                
+        name: response.data.name,        
+        year: response.data.year, 
+        make: response.data.make,
+        model: response.data.model,
+        trim: response.data.trim,
+        tradein_value: response.data.tradein_value,
+        private_sale_value: response.data.private_sale_value,
+        payoff: response.data.payoff
             })
         })
 }    
