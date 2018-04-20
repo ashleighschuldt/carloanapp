@@ -50,7 +50,7 @@ deleteVehicle(id){
     })
     return (
       <div >
-         `{ this.props.user.username }'s Vehicles'`
+         { this.props.user.username }'s Vehicles
         <Header />
         <Link to={`/newvehicle`}><button> Add New Vehicle </button></Link>
           {vehicles}

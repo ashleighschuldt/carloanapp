@@ -13,7 +13,7 @@ class Dashboard extends Component {
   render() {
     return (
       <div >
-        `{ this.props.user.username }'s Dashboard'`
+        { this.props.user.username }'s Dashboard
         <Header />
           Dashboard
           <Link to={`/vehicles`}>Vehicles</Link>

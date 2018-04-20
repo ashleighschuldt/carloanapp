@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Header from '../../Components/Header';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import './Loans.css';
 
@@ -24,6 +26,7 @@ class Loans extends Component {
   render() {
     return (
       <div >
+        { this.props.user.username }'s Loans
         <Header />
           Loans
           <Link to={`/newloan`}><button>Add New</button></Link>
@@ -32,4 +35,4 @@ class Loans extends Component {
   }
 }
 
-export default Loans;
+export default connect (state => state)(Loans);

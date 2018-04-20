@@ -52,9 +52,9 @@ module.exports = {
             make: req.body.make,
             model: req.body.model,
             trim: req.body.trim,
-            privateSaleValue: req.body.privateSaleValue,
-            tradeInValue: req.body.tradeInValue,
-            payoff: req.body.payoffValue,
+            privateSaleValue: Number(req.body.privateSaleValue),
+            tradeInValue: Number(req.body.tradeInValue),
+            payoff: Number(req.body.payoffValue),
         })
         .then(vehicles => {
             return db.vehicles.getVehiclesByUser ({ userId: req.session.user })
