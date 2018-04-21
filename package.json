@@ -5,6 +5,7 @@
   "proxy": "http://localhost:5000/",
   "dependencies": {
     "axios": "^0.18.0",
+    "bcrypt": "^2.0.1",
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "dotenv": "^5.0.1",
@@ -12,6 +13,7 @@
     "express-session": "^1.15.6",
     "passport": "^0.4.0",
     "passport-auth0": "^0.6.1",
+    "passport-local": "^1.0.0",
     "react": "^16.3.1",
     "react-dom": "^16.3.1",
     "react-redux": "^5.0.7",

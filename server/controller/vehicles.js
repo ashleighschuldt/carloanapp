@@ -1,7 +1,7 @@
 module.exports = {
     getVehicles: (req, res) => {
         const db = req.app.get('db');
-        db.vehicles.getVehiclesByUser({ userId: req.session.user })
+        db.vehicles.getVehiclesByUser({ userId: req.user.id })
             .then(vehicles => {
                 res.status(200).send(vehicles);
             })
@@ -21,7 +21,7 @@ module.exports = {
     addVehicle: (req, res) => {
         const db = req.app.get('db');
         db.vehicles.addVehicle({ 
-            userId: req.session.user,
+            userId: req.user.id,
             name: req.body.name,
             year: req.body.year,
             make: req.body.make,
@@ -33,7 +33,7 @@ module.exports = {
              
         })
           .then(vehicles => {
-              return db.vehicles.getVehiclesByUser({ userId: req.session.user })
+              return db.vehicles.getVehiclesByUser({ userId: req.user.id })
           })  
           .then( vehicles => {
               res.status(200).send(vehicles);
@@ -45,7 +45,7 @@ module.exports = {
     editVehicle: (req, res) => {
         const db = req.app.get('db');
         db.vehicles.editVehicle({
-            userId: req.session.user,
+            userId: req.user.id,
             id: req.params.id,
             name: req.body.name,
             year: req.body.year,
@@ -57,7 +57,7 @@ module.exports = {
             payoff: Number(req.body.payoffValue),
         })
         .then(vehicles => {
-            return db.vehicles.getVehiclesByUser ({ userId: req.session.user })
+            return db.vehicles.getVehiclesByUser ({ userId: req.user.id })
         })
         .then( vehicles => {
             res.status(200).send(vehicles)
@@ -70,7 +70,7 @@ module.exports = {
         const db = req.app.get('db');
     db.vehicles.deleteVehicle({ vehicleId: req.params.id })
         .then(vehicles => {
-            return db.vehicles.getVehiclesByUser({ userId: req.session.user })
+            return db.vehicles.getVehiclesByUser({ userId: req.user.id })
         })
         .then( vehicles => {
             res.status(200).send(vehicles)

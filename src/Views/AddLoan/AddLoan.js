@@ -11,12 +11,15 @@ class AddLoan extends Component {
       name: '',
       purchasePrice: '',
       cashDown: '',
-      purchasePrice: '',
-      cashPrice: '',
+      tradeInValue: '',
+      privateSale: '',
+      none: '',
+      amount: '',
+      monthly: '',
 
     }
     this.handleChange = this.handleChange.bind(this);
-    this.loanAmount = this.loanAmount.bind(this);
+    
   }
 
   componentWillMount(){
@@ -28,31 +31,16 @@ class AddLoan extends Component {
       })
   }
   
-  loanPayment(amount, payments, interest){
-    this.setState({
-      monthly: amount/((((1+interest)^payments)-1)/(interest*(1+interest)^payments))
-    })
-  }
-  loanAmount(){
-    const amount = 0;
-    const tradeInNet = this.state.tradeInValue - this.state.payoff;
-    const privateSaleNet = this.state.privateSale - this.state.payoff;
-    const tax = this.state.tradeInValue?
-    this.state.taxRate*(this.state.purchasePrice - this.state.tradeInValue):
-    this.state.taxRate*(this.state.purchasePrice);
-      if(this.state.none!=''){
-        const amount = this.state.purchasePrice - this.state.cashdown + tax
-    } else if (this.state.tradeIn!=''){
-        const amount = this.state.purchasePrice - this.state.cashdown + tax - tradeInNet
-    } else if (this.state.privateSale!=''){
-        const amount = this.state.purchasePrice - this.state.cashdown + tax - privateSaleNet 
-    } 
-        this.setState({
-            loanAmount: amount
-     })
-                   
-  }
 
+
+  handleCalculate(){
+      const amount = loanAmount(this.state.purchasePrice, this.state.cashDown, this.state.taxRate, this.state.tradeInValue, this.state.privateSale, this.state.none, this.state.payoff)
+      const monthly = loanPayment(amount, this.state.payments, this.state.interest)
+      this.setState({
+        monthly,
+        amount
+      })
+    }
 
 
   handleChange(e){
@@ -79,7 +67,7 @@ class AddLoan extends Component {
           <label>Tax Rate: </label>
           { this.state.taxRate }
           <label>Loan Amount:</label>
-          {this.state.purchasePrice - this.state.cashPrice }
+          { this.state.amount }
           <label>Annual Interest Rate</label>
           <input name='interest' onChange={ this.handleChange }/>
           <label>Loan Term (in months):</label>
@@ -88,8 +76,7 @@ class AddLoan extends Component {
           <button>Save</button>
           <label>Monthly Payment:</label>
           { this.monthly }
-          <label>Total Interest</label>
-          { this.state.totalInterest }
+          
           
       </div>
     );
@@ -97,3 +84,23 @@ class AddLoan extends Component {
 }
 
 export default AddLoan;
+
+function loanPayment(amount, payments, interest){
+  const pmt = amount/((((1+(interest/100/12))^payments)-1)/((interest/100/12)*(1+(interest/100/12))^payments));
+  
+    return pmt;
+}
+
+function loanAmount(purchasePrice, cashDown, taxRate, tradeInValue, privateSale, none, payoff){
+    const amount;
+    if (none!=''){
+      amount: purchasePrice - cashDown + (purchasePrice*taxRate)
+    }
+    else if (tradeInValue!=''){
+      amount: purchasePrice - cashDown + ((purchasePrice-tradeInValue)*taxRate)-(tradeInValue - payoff)
+    } 
+    else if (privateSale!=''){
+      amount: purchasePrice - cashdown +(purchasePrice*taxRate)-(privateSale - payoff)
+    } return amount;
+}
+
