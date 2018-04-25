@@ -25,7 +25,7 @@ class Login extends Component {
         e.preventDefault();
         axios.post(`/api/auth/${login}`, {username:this.props.user.username, password:this.props.user.password})
             .then((response)=>{
-                if(response.data.success){
+                if(response.data==='success'){
                     this.props.history.push('/Dashboard');
                 }else{
                     alert("your email or password is incorrect")

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
+import {loanAmount, loanPayment} from '../../lib/util';
 import './AddLoan.css';
 
 class AddLoan extends Component {
@@ -16,17 +16,26 @@ class AddLoan extends Component {
       none: '',
       amount: '',
       monthly: '',
+      vehicles: [],
 
     }
     this.handleChange = this.handleChange.bind(this);
+    this.handleCalculate = this.handleCalculate.bind(this);
+    this.tradeInChange = this.tradeInChange.bind(this);
     
   }
 
   componentWillMount(){
-    axios.get(`/api/tax`)
-      .then(res => {
+    // axios.get(`/api/tax`)
+    //   .then(res => {
+    //     this.setState({
+    //       taxRate: res.data.totalRate
+    //     })
+    //   })
+    axios.get(`/api/vehicles`)
+      .then(response => {
         this.setState({
-          taxRate: res.data.totalRate
+          vehicles: response.data
         })
       })
   }
@@ -34,7 +43,7 @@ class AddLoan extends Component {
 
 
   handleCalculate(){
-      const amount = loanAmount(this.state.purchasePrice, this.state.cashDown, this.state.taxRate, this.state.tradeInValue, this.state.privateSale, this.state.none, this.state.payoff)
+      const amount = loanAmount(this.state.none, this.state.tradeInValue, this.state.privateSale, this.state.purchasePrice, this.state.cashDown, this.state.taxRate, this.state.payoff)
       const monthly = loanPayment(amount, this.state.payments, this.state.interest)
       this.setState({
         monthly,
@@ -49,7 +58,18 @@ class AddLoan extends Component {
     })  
   }
 
+ tradeInChange(){
+   this.setState({
+     tradeInValue: this.state.vehicles.tradein_value,
+     payoff: this.state.vehicles.payoff
+   })
+ }
+
   render() {
+const options = this.state.vehicles.map((e,i) => {
+  return <option key={i} value={this.state.vehicles[i]}>{this.state.vehicles[i].name}</option>;
+});
+
     return (
       <div >
           <label>Name:</label>
@@ -57,13 +77,19 @@ class AddLoan extends Component {
           <label>Purchase Price:</label>
           <input name='purchasePrice' onChange={ this.handleChange }/>
           <label>Cash Down:</label>
-          <input value={0} name='cashDown' onChange={ this.handleChange }/>
+          <input name='cashDown' onChange={ this.handleChange }/>
           <label>Trade-in</label>
-          <input type='checkbox' name='tradeIn'/>
+          <select >
+            <option value="">Select One</option>
+            {options}
+          </select>
           <label>Private Sale</label>
-          <input type='checkbox' name='privateSale'/>
+          <select onChange={ this.tradeInChange }>
+            <option value="">Select One</option>
+            {options}
+          </select>
           <label>No Vehicle</label>
-          <input type='checkbox' name='none' value={this.state.none} checked/>
+          <input type='checkbox' name='none' value={this.state.none} />
           <label>Tax Rate: </label>
           { this.state.taxRate }
           <label>Loan Amount:</label>
@@ -72,7 +98,7 @@ class AddLoan extends Component {
           <input name='interest' onChange={ this.handleChange }/>
           <label>Loan Term (in months):</label>
           <input name='payments' onChange={ this.handleChange }/>
-          <button onClick={ this.loanAmount }>Calculate</button>
+          <button onClick={ this.handleCalculate }>Calculate</button>
           <button>Save</button>
           <label>Monthly Payment:</label>
           { this.monthly }
@@ -85,22 +111,5 @@ class AddLoan extends Component {
 
 export default AddLoan;
 
-function loanPayment(amount, payments, interest){
-  const pmt = amount/((((1+(interest/100/12))^payments)-1)/((interest/100/12)*(1+(interest/100/12))^payments));
-  
-    return pmt;
-}
 
-function loanAmount(purchasePrice, cashDown, taxRate, tradeInValue, privateSale, none, payoff){
-    const amount;
-    if (none!=''){
-      amount: purchasePrice - cashDown + (purchasePrice*taxRate)
-    }
-    else if (tradeInValue!=''){
-      amount: purchasePrice - cashDown + ((purchasePrice-tradeInValue)*taxRate)-(tradeInValue - payoff)
-    } 
-    else if (privateSale!=''){
-      amount: purchasePrice - cashdown +(purchasePrice*taxRate)-(privateSale - payoff)
-    } return amount;
-}
 

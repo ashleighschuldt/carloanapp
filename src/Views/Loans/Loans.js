@@ -3,8 +3,6 @@ import Header from '../../Components/Header';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-
 import './Loans.css';
 
 class Loans extends Component {

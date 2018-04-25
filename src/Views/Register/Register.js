@@ -23,7 +23,7 @@ handleChange(e){
 
 createUserOrLogin(e, login){
   e.preventDefault();
-  axios.post(`/api/auth/${login}`, {username:this.props.user.username, password:this.props.user.password})
+  axios.post(`/api/auth/${login}`, {username:this.props.user.username, password:this.props.user.password, address: this.props.user.address, city: this.props.user.city, state: this.props.user.state, zip: this.props.user.zip })
       .then((response)=>{
           if(response.data.success){
               this.props.history.push('/Dashboard');

@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import Header from '../../Components/Header';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 
 import './Dashboard.css';
 
 class Dashboard extends Component {
-    constructor(props){
-      super(props);
-    }
+  
   render() {
     return (
       <div >
