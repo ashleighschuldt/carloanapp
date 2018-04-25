@@ -23,7 +23,7 @@ import expect from 'expect';
 
 // console.log(discount(6,360))
 
-function noCar(none, purchasePrice, cashDown, taxRate){
+function noCar(purchasePrice, cashDown, taxRate){
     const amount = purchasePrice - cashDown + (purchasePrice*taxRate/100)
     return Number(amount.toFixed(2))
 }
@@ -40,13 +40,13 @@ function privateSell(privateSale, purchasePrice, cashDown, taxRate, payoff){
 
 export function loanAmount(none, tradeInValue, privateSale, purchasePrice, cashDown, taxRate, payoff){
     
-    if (none!=='' || 0){
-        return noCar(none, purchasePrice, cashDown, taxRate)
+    if (none!==''){
+        return noCar(purchasePrice, cashDown, taxRate)
     }
-    else if (tradeInValue!=='' || 0){
+    else if (tradeInValue!==''){
         return tradeIn(tradeInValue, purchasePrice, cashDown, taxRate, payoff)
     } 
-    else if (privateSale!==''|| 0){
+    else if (privateSale!==''){
         return privateSell(privateSale, purchasePrice, cashDown, taxRate, payoff)
     } 
 } 
@@ -58,17 +58,28 @@ export function loanPayment(amount, payments, interest){
 }
 
 expect(
-    noCar(1,30000,5000,6.85)
+    noCar(30000,5000,6.85)
 ).toEqual(27055)
 
 expect(
     tradeIn(25000, 30000, 0, 6.85, 20000)
 ).toEqual(25342.50)
 
+expect(
+    privateSell(25000, 30000, 0, 6.85, 20000)
+).toEqual(27055.00)
 
 expect(
-    loanAmount(1,25000,1,30000,0,6.85,20000)
+    loanAmount('',25000,'',30000,0,6.85,20000)
 ).toEqual(25342.50)
+
+expect(
+    loanAmount(0,'','',30000,5000,6.85,0)
+).toEqual(27055)
+
+expect(
+    loanAmount('','',25000,30000,0,6.85,20000)
+).toEqual(27055.00)
 
 
 expect(

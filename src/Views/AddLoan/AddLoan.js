@@ -58,15 +58,16 @@ class AddLoan extends Component {
     })  
   }
 
- tradeInChange(){
+ tradeInChange(e){
    this.setState({
-     tradeInValue: this.state.vehicles.tradein_value,
-     payoff: this.state.vehicles.payoff
+     tradeInValue: this.state.vehicles[e.target.value].tradein_value,
+     payoff: this.state.vehicles[e.target.value].payoff
    })
  }
 
   render() {
 const options = this.state.vehicles.map((e,i) => {
+  debugger
   return <option key={i} value={this.state.vehicles[i]}>{this.state.vehicles[i].name}</option>;
 });
 
@@ -91,7 +92,7 @@ const options = this.state.vehicles.map((e,i) => {
           <label>No Vehicle</label>
           <input type='checkbox' name='none' value={this.state.none} />
           <label>Tax Rate: </label>
-          { this.state.taxRate }
+          <input name='taxRate' onChange={this.handleChange}/>
           <label>Loan Amount:</label>
           { this.state.amount }
           <label>Annual Interest Rate</label>

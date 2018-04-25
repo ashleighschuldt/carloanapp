@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-
 import './App.css';
 
 import Login from './Views/Login/Login';
@@ -12,6 +11,7 @@ import AddVehicle from './Views/AddVehicle/AddVehicle';
 import EditVehicle from './Views/EditVehicle/EditVehicle';
 import Loans from './Views/Loans/Loans';
 import AddLoan from './Views/AddLoan/AddLoan';
+
 
 class App extends Component {
   render() {
