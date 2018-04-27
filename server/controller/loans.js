@@ -26,5 +26,29 @@ module.exports = {
         .catch(err => {
             console.log(err);
         })
+    },
+    addLoan: (req, res ) => {
+        const db = req.app.get('db');
+        db.loans.addLoan({ 
+            userId: req.user.id,
+            name: req.body.name,
+            purchasePrice: req.body.name,
+            cashDown: req.body.cashDown,
+            tradeInValue: req.body.tradeInValue,
+            payoff: req.body.payoff,
+            privateSale: req.body.payoff,
+            loanAmount: req.body.loanAmount,
+            interest: req.body.interest,
+            payments: req.body.payments
+        })
+        .then(loans => {
+            return db.loans.getLoansByUser({ userId: req.user.id })
+        })
+        .then(loans => {
+            res.status(200).send(loans);
+        })
+        .catch(err => {
+            console.log(err)
+        })
     }
 }

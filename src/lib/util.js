@@ -39,7 +39,6 @@ function privateSell(privateSale, purchasePrice, cashDown, taxRate, payoff){
 
 
 export function loanAmount(none, tradeInValue, privateSale, purchasePrice, cashDown, taxRate, payoff){
-    
     if (none!==''){
         return noCar(purchasePrice, cashDown, taxRate)
     }
@@ -58,7 +57,7 @@ export function loanPayment(amount, payments, interest){
 }
 
 expect(
-    noCar(30000,5000,6.85)
+    noCar('30000','5000','6.85')
 ).toEqual(27055)
 
 expect(

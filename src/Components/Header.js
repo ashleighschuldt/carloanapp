@@ -8,8 +8,12 @@ class Header extends Component {
   render() {
     return (
         <div>
-        <Link to={`/dashboard`}>Home</Link>
-        <Link to={`/`}>Logout</Link>
+        <div>
+            <Link to={`/dashboard`}>Home</Link>
+        </div>
+        <div>
+            <Link to={`/`}>Logout</Link>
+        </div>
         </div>
     )}
 }

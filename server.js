@@ -95,6 +95,7 @@ app.get(`/api/vehicles/:id`, vehicles.getVehicle);
 
 app.get(`/api/loans`, loans.getLoans);
 app.get(`/api/tax`, loans.getTax);
+app.post(`/api/loan`, loans.addLoan);
 
 const port = process.env.PORT || 5000;
 app.listen(port, ()=>{

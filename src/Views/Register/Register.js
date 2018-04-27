@@ -38,19 +38,25 @@ createUserOrLogin(e, login){
 
   render() {
     return (
-      <div >
+      <div className='Register'>
            <label>Username:</label>
           <input name='username' onChange={ this.handleChange }/>
+          <br/>
           <label>Password:</label>
           <input type='password' name='password' onChange={ this.handleChange }/>
+          <br/>
           <label>Address:</label>
           <input name='address' onChange={ this.handleChange }/>
+          <br/>
           <label>City:</label>
           <input name='city' onChange={ this.handleChange }/>
+          <br/>
           <label>State:</label>
           <input name='state' onChange={ this.handleChange }/>
+          <br/>
           <label>Zip:</label>
           <input name='zip' onChange={ this.handleChange }/>
+          <br />
           <button onClick={(event)=>{this.createUserOrLogin(event, 'register')}}>Create Account</button>
       </div>
     );

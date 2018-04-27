@@ -38,13 +38,19 @@ class Login extends Component {
 
   render() {
     return (
-      <div >
+      <div > <h1>Car Loan App</h1>
+      <div className='Login'>
           <label>Username:</label>
           <input name='username' onChange={ this.handleChange }/>
+          <br></br>
           <label>Password:</label>
           <input type='password' name='password' onChange={ this.handleChange }/>
+          <br></br>
+          <div className='buttons'>
           <button onClick={(event)=>{this.createUserOrLogin(event, 'login')}}>Login</button>
           <Link to={`/register`}><button>Create an Account</button></Link>
+      </div>
+      </div>
       </div>
     );
   }

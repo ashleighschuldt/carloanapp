@@ -13,15 +13,20 @@ class AddLoan extends Component {
       cashDown: '',
       tradeInValue: '',
       privateSale: '',
-      none: '',
+      payoff: '',
+      none: 0,
       amount: '',
       monthly: '',
+      calc: 'none',
       vehicles: [],
 
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleCalculate = this.handleCalculate.bind(this);
     this.tradeInChange = this.tradeInChange.bind(this);
+    this.privateSaleChange = this.privateSaleChange.bind(this);
+    this.calcType = this.calcType.bind(this);
+    this.saveLoan = this.saveLoan.bind(this);
     
   }
 
@@ -43,8 +48,8 @@ class AddLoan extends Component {
 
 
   handleCalculate(){
-      const amount = loanAmount(this.state.none, this.state.tradeInValue, this.state.privateSale, this.state.purchasePrice, this.state.cashDown, this.state.taxRate, this.state.payoff)
-      const monthly = loanPayment(amount, this.state.payments, this.state.interest)
+    const amount = loanAmount(this.state.none, this.state.tradeInValue, this.state.privateSale, this.state.purchasePrice, this.state.cashDown, this.state.taxRate, this.state.payoff)
+    const monthly = loanPayment(amount, this.state.payments, this.state.interest)
       this.setState({
         monthly,
         amount
@@ -59,52 +64,109 @@ class AddLoan extends Component {
   }
 
  tradeInChange(e){
+   const index = e.target.value
+   const tradein = this.state.vehicles[index].tradein_value;
+   const pay = this.state.vehicles[index].payoff;
    this.setState({
-     tradeInValue: this.state.vehicles[e.target.value].tradein_value,
-     payoff: this.state.vehicles[e.target.value].payoff
+     tradeInValue: tradein || '',
+     payoff: pay || '',
+     none: '',
    })
  }
 
+ privateSaleChange(e){
+  const index = e.target.value
+  const privateSale = this.state.vehicles[index].private_sale_value;
+  const pay = this.state.vehicles[index].payoff;
+  this.setState({
+    privateSale: privateSale || '',
+    payoff: pay || '',
+    none: '',
+  })
+}
+
+calcType(e){
+  this.setState({
+    calc: e.target.value,
+    payoff: '',
+    tradeInValue: '',
+    privateSale: '',
+  })
+}
+
+saveLoan(){
+  const payoff = this.state.payoff==''?0: this.state.payoff;
+  const privateSale = this.state.privateSale==''?0: this.state.privateSale;
+  const tradeInValue = this.state.tradeInValue==''?0: this.state.tradeInValue;
+  axios.post(`/api/loan`, {
+    name: this.state.name,
+    purchasePrice: this.state.purchasePrice,
+    cashDown: this.state.cashDown,
+    tradeInValue: tradeInValue,
+    payoff: payoff,
+    privateSale: privateSale,
+    loanAmount: this.state.amount,
+    interest: this.state.interest,
+    payments: this.state.payments
+  })
+  .then( res =>
+    this.props.history.push(`/loan`), 
+  )}
+
   render() {
-const options = this.state.vehicles.map((e,i) => {
-  debugger
-  return <option key={i} value={this.state.vehicles[i]}>{this.state.vehicles[i].name}</option>;
-});
+    const options = this.state.vehicles.map((vehicle,i) => {
+      const { private_sale_value, tradein_value, payoff, name } = vehicle;
+      return <option key={i} value={i} >{name}</option>;
+    });
+
+    
 
     return (
-      <div >
+      <div>
+          <label>Do you have a vehicle you are selling?</label>
+            <select onChange={ this.calcType }>
+              <option value='none'>No</option>
+              <option value='privatesale'>Private Sale</option>
+              <option value='tradein'>Trade-In</option>
+            </select>
           <label>Name:</label>
           <input name='name' onChange={ this.handleChange }/>
           <label>Purchase Price:</label>
           <input name='purchasePrice' onChange={ this.handleChange }/>
           <label>Cash Down:</label>
           <input name='cashDown' onChange={ this.handleChange }/>
-          <label>Trade-in</label>
-          <select >
-            <option value="">Select One</option>
-            {options}
-          </select>
-          <label>Private Sale</label>
-          <select onChange={ this.tradeInChange }>
-            <option value="">Select One</option>
-            {options}
-          </select>
-          <label>No Vehicle</label>
-          <input type='checkbox' name='none' value={this.state.none} />
+          {
+            this.state.calc === 'tradein' &&
+            <div>
+              <label>Trade-in</label>
+              <select onChange={ this.tradeInChange }>
+                <option value="">Select One</option>
+                {options}
+              </select>
+            </div>
+          }
+          {
+            this.state.calc ==='privatesale' &&
+          <div>
+            <label>Private Sale</label>
+            <select onChange={ this.privateSaleChange } >
+              <option value="">Select One</option>
+              {options}
+            </select>
+          </div>
+          }
           <label>Tax Rate: </label>
           <input name='taxRate' onChange={this.handleChange}/>
-          <label>Loan Amount:</label>
-          { this.state.amount }
           <label>Annual Interest Rate</label>
           <input name='interest' onChange={ this.handleChange }/>
           <label>Loan Term (in months):</label>
           <input name='payments' onChange={ this.handleChange }/>
           <button onClick={ this.handleCalculate }>Calculate</button>
-          <button>Save</button>
+          <label>Loan Amount:</label>
+          { this.state.amount }
           <label>Monthly Payment:</label>
-          { this.monthly }
-          
-          
+          { this.state.monthly }
+          <button onClick={ this.AddLoan }>Save</button>
       </div>
     );
   }
