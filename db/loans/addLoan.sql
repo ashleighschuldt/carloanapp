@@ -10,6 +10,7 @@ INSERT INTO Loan (
     loan_term,
     monthly_payment,
     tax_rate,
+    total_interest,
     user_id
 )
 VALUES (
@@ -24,5 +25,6 @@ VALUES (
     ${payments},
     ${monthly},
     ${taxRate},
+    ${totalInterest},
     ${userId}
 )

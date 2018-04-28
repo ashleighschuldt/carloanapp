@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import {loanAmount, loanPayment} from '../../lib/util';
+import {totalInterest, loanAmount, loanPayment} from '../../lib/util';
 import './AddLoan.css';
 import Header from '../../Components/Header'
 
@@ -19,6 +19,7 @@ class AddLoan extends Component {
       amount: '',
       monthly: '',
       calc: 'none',
+      interestPaid: '',
       vehicles: [],
 
     }
@@ -51,9 +52,11 @@ class AddLoan extends Component {
   handleCalculate(){
     const amount = loanAmount(this.state.none, this.state.tradeInValue, this.state.privateSale, this.state.purchasePrice, this.state.cashDown, this.state.taxRate, this.state.payoff)
     const monthly = loanPayment(amount, this.state.payments, this.state.interest)
+    const interestPaid = totalInterest(monthly, this.state.payments, amount)
       this.setState({
         monthly,
-        amount
+        amount,
+        interestPaid
       })
     }
 
@@ -107,7 +110,8 @@ saveLoan(){
     interest: this.state.interest,
     payments: this.state.payments,
     monthly: this.state.monthly,
-    taxRate: this.state.taxRate
+    taxRate: this.state.taxRate,
+    totalInterest: this.state.interestPaid
   })
   .then( res =>
     this.props.history.push(`/loan`), 
@@ -183,6 +187,8 @@ saveLoan(){
             ${ this.state.amount }
             <label>Monthly Payment:</label>
             ${ this.state.monthly }
+            <label>Total Interest Paid:</label>
+            ${ this.state.interestPaid }
           </div>
           <div className='save'>
             <button onClick={ this.saveLoan }>Save</button>

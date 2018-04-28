@@ -41,7 +41,8 @@ module.exports = {
             interest: req.body.interest,
             payments: req.body.payments,
             monthly: req.body.monthly,
-            taxRate: req.body.taxRate
+            taxRate: req.body.taxRate,
+            totalInterest: req.body.totalInterest
         })
         .then(loans => {
             return db.loans.getLoansByUser({ userId: req.user.id })

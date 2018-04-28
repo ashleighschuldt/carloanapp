@@ -39,7 +39,7 @@ class Loans extends Component {
         <b>{this.state.loans[i].name}</b>
         <b>Amount:</b> ${this.state.loans[i].loan_amount}
         <b>Payment:</b> ${this.state.loans[i].monthly_payment}
-        <b>{this.state.loans[i].loan_term/12} years</b>
+        <b>Interest Paid:</b>${this.state.loans[i].total_interest}
         <button onClick={() => {this.deleteLoan(e.id)}}>Delete</button>
       </div>)
     })

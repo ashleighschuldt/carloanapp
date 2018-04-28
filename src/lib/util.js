@@ -37,6 +37,12 @@ function privateSell(privateSale, purchasePrice, cashDown, taxRate, payoff){
     return Number(amount.toFixed(2))
 }
 
+export function totalInterest(pmt, payments, amount){
+    const totalInterest = (pmt * payments ) - amount 
+    return Number(totalInterest.toFixed(2))
+}
+
+
 
 export function loanAmount(none, tradeInValue, privateSale, purchasePrice, cashDown, taxRate, payoff){
     if (none!==''){
@@ -88,5 +94,9 @@ expect(
 expect(
     loanPayment(100000,360,6)
 ).toEqual(599.55)
+
+expect(
+    totalInterest( 289.50, 60, 15000)
+).toEqual(2370.00)
 
 console.log('All tests passing!')
