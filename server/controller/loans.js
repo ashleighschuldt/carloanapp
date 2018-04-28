@@ -32,14 +32,16 @@ module.exports = {
         db.loans.addLoan({ 
             userId: req.user.id,
             name: req.body.name,
-            purchasePrice: req.body.name,
+            purchasePrice: req.body.purchasePrice,
             cashDown: req.body.cashDown,
             tradeInValue: req.body.tradeInValue,
             payoff: req.body.payoff,
             privateSale: req.body.payoff,
             loanAmount: req.body.loanAmount,
             interest: req.body.interest,
-            payments: req.body.payments
+            payments: req.body.payments,
+            monthly: req.body.monthly,
+            taxRate: req.body.taxRate
         })
         .then(loans => {
             return db.loans.getLoansByUser({ userId: req.user.id })
@@ -50,5 +52,18 @@ module.exports = {
         .catch(err => {
             console.log(err)
         })
+    },
+    deleteLoan: (req, res ) => {
+        const db = req.app.get('db');
+    db.loans.deleteLoan({ loanId: req.params.id })
+        .then(loans => {
+            return db.loans.getLoansByUser({ userId: req.user.id })
+        })
+        .then( loans => {
+            res.status(200).send(loans)
+        })
+        .catch( err => {
+            console.log(err);
+        })        
     }
 }

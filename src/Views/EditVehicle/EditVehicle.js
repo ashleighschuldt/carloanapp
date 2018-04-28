@@ -55,7 +55,7 @@ handleChange(e){
       payoffValue: this.state.payoff
     })
     .then( res =>
-    this.props.history.push(`/dashboard`),
+    this.props.history.push(`/vehicles`),
   )
   } 
 

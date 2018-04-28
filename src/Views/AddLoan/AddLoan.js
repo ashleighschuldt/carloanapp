@@ -95,19 +95,18 @@ calcType(e){
 }
 
 saveLoan(){
-  const payoff = this.state.payoff==''?0: this.state.payoff;
-  const privateSale = this.state.privateSale==''?0: this.state.privateSale;
-  const tradeInValue = this.state.tradeInValue==''?0: this.state.tradeInValue;
   axios.post(`/api/loan`, {
     name: this.state.name,
     purchasePrice: this.state.purchasePrice,
     cashDown: this.state.cashDown,
-    tradeInValue: tradeInValue,
-    payoff: payoff,
-    privateSale: privateSale,
+    tradeInValue: this.state.tradeInValue,
+    payoff: this.state.payoff,
+    privateSale: this.state.privateSale,
     loanAmount: this.state.amount,
     interest: this.state.interest,
-    payments: this.state.payments
+    payments: this.state.payments,
+    monthly: this.state.monthly,
+    taxRate: this.state.taxRate
   })
   .then( res =>
     this.props.history.push(`/loan`), 
@@ -166,7 +165,7 @@ saveLoan(){
           { this.state.amount }
           <label>Monthly Payment:</label>
           { this.state.monthly }
-          <button onClick={ this.AddLoan }>Save</button>
+          <button onClick={ this.saveLoan }>Save</button>
       </div>
     );
   }

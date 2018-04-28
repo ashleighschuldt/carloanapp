@@ -13,16 +13,16 @@ INSERT INTO Loan (
     user_id
 )
 VALUES (
-    ${name},
-    ${purchasePrice},
-    ${cashDown},
-    ${tradeInValue},
-    ${payoff},
-    ${privateSale},
-    ${loanAmount},
-    ${interest},
-    ${payments},
-    ${monthly},
-    ${taxRate},
-    ${userId}
+    'new',
+    '30000',
+    '5000',
+    '',
+    '',
+    '',
+    '27055',
+    '3.99',
+    '60',
+    '498.14',
+    '6.85',
+    '10'
 )

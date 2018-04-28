@@ -12,11 +12,12 @@ class Dashboard extends Component {
       <div >
         { this.props.user.username }'s Dashboard
         <Header />
-          Dashboard
           <Link to={`/vehicles`}>Vehicles</Link>
           <Link to={`/loan`}>Loans</Link>
-          <p> You have no saved vehicles or loans. 
-            Click on vehicles to get started!</p>
+          <h1 className='dashboard'>Welcome to your car loan app!</h1>
+          <p>You can use this app to calculate payments with a trade-in vehicle or private sale.
+            Compare and see which option is more beneficial to you!</p>
+            <p>Save your vehicles, save your different loan options!</p>  
       </div>
     );
   }
