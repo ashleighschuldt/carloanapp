@@ -31,7 +31,7 @@ class AddVehicle extends Component {
         payoffValue: this.state.payoffValue
       })
       .then( res =>
-      this.props.history.push(`/dashboard`),
+      this.props.history.push(`/vehicles`),
     )
     } 
 

@@ -1,9 +1,21 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 import './Header.css';
 
 class Header extends Component {
+    constructor(props){
+        super(props);
+        this.logout = this.logout.bind(this);
+    }
+
+    logout(){
+        axios.get(`/logout`)
+        .then(res => {
+            res
+        })
+    }
     
   render() {
     return (
@@ -18,7 +30,7 @@ class Header extends Component {
           <Link to={`/loan`}>My Loans</Link>
         </div>
         <div className='logout'>
-            <Link to={`/`}>Logout</Link>
+            <Link to={`/`} onClick={this.logout}>Logout</Link>
         </div>
         </div>
     )}

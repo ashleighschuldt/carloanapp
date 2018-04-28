@@ -86,6 +86,10 @@ app.use(passport.session());
 //End Points
 app.post(`/api/auth/login`, passport.authenticate('local'), (req, res) => res.send('success'));
 app.post(`/api/auth/register`, register);
+app.get('/logout', function(req, res){
+    req.logout();
+    res.sendStatus(200);
+  });
 
 app.get(`/api/vehicles`, vehicles.getVehicles);
 app.post(`/api/vehicles`, vehicles.addVehicle);

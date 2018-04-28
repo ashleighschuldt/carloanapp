@@ -9,7 +9,7 @@
 }
 .newloan {
     width: 95%;
-    margin: auto;
+    margin: 10px auto;
     display: flex;
     justify-content: center;
 }
