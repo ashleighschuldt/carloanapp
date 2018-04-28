@@ -7,11 +7,17 @@ class Header extends Component {
     
   render() {
     return (
-        <div>
-        <div>
+        <div className='header'>
+        <div className='home'>
             <Link to={`/dashboard`}>Home</Link>
         </div>
-        <div>
+        <div className='vehicles'>
+          <Link to={`/vehicles`}>My Vehicles</Link>
+        </div>
+        <div className='loan'>  
+          <Link to={`/loan`}>My Loans</Link>
+        </div>
+        <div className='logout'>
             <Link to={`/`}>Logout</Link>
         </div>
         </div>

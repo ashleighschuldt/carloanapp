@@ -1,0 +1,15 @@
+.loans {
+    border: 1px solid black;
+    display: flex;
+    justify-content: space-around;
+    margin: 2vh auto;
+    padding: 10px 10px;
+    width: 90%;
+    font-size: 18px;
+}
+.newloan {
+    width: 95%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}

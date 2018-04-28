@@ -63,23 +63,34 @@ handleChange(e){
     return (
       <div >
           <Header />
-          <label>Name:</label>
-          <input value={this.state.name} name='name' onChange={ this.handleChange }/>
-          <label>Year:</label>
-          <input value={this.state.year} name='year' onChange={ this.handleChange }/>
-          <label>Make:</label>
-          <input value={this.state.make} name='make' onChange={ this.handleChange }/>
-          <label>Model:</label>  
-          <input value={this.state.model} name='model' onChange={ this.handleChange }/>
-          <label>Trim:</label>
-          <input value={this.state.trim} name='trim' onChange={ this.handleChange }/>
-          <label>Trade-in Value:</label>
-          <input value={this.state.tradeInValue} name='tradeInValue' onChange={ this.handleChange }/>
-          <label>Private Sale Value:</label>
-          <input value={this.state.privateSaleValue} name='privateSaleValue' onChange={ this.handleChange }/>
-          <label>Payoff Value:</label>
-          <input value={this.state.payoff} name='payoff' onChange={ this.handleChange }/>
-          <button onClick={ this.editVehicle }>Save</button>
+          <div className='addvehicle'>
+            <label>Name:</label>
+            <input value={this.state.name} name='name' onChange={ this.handleChange }/>
+            <br/>
+            <label>Year:</label>
+            <input value={this.state.year} name='year' onChange={ this.handleChange }/>
+            <br/>
+            <label>Make:</label>
+            <input value={this.state.make} name='make' onChange={ this.handleChange }/>
+            <br/>
+            <label>Model:</label>  
+            <input value={this.state.model} name='model' onChange={ this.handleChange }/>
+            <br/>
+            <label>Trim:</label>
+            <input value={this.state.trim} name='trim' onChange={ this.handleChange }/>
+            <br/>
+            <label>Trade-in Value:</label>
+            <input value={this.state.tradeInValue} name='tradeInValue' onChange={ this.handleChange }/>
+            <br/>
+            <label>Private Sale Value:</label>
+            <input value={this.state.privateSaleValue} name='privateSaleValue' onChange={ this.handleChange }/>
+            <br/>
+            <label>Payoff Value:</label>
+            <input value={this.state.payoff} name='payoff' onChange={ this.handleChange }/>
+          </div>
+          <div className='save'>
+            <button onClick={ this.editVehicle }>Save</button>
+          </div>
       </div>
     );
   }

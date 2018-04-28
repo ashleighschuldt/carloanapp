@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import {loanAmount, loanPayment} from '../../lib/util';
 import './AddLoan.css';
+import Header from '../../Components/Header'
 
 class AddLoan extends Component {
   constructor(props){
@@ -122,50 +123,70 @@ saveLoan(){
 
     return (
       <div>
+          <Header />
+          <div className='newloans'>
           <label>Do you have a vehicle you are selling?</label>
             <select onChange={ this.calcType }>
               <option value='none'>No</option>
               <option value='privatesale'>Private Sale</option>
               <option value='tradein'>Trade-In</option>
             </select>
-          <label>Name:</label>
-          <input name='name' onChange={ this.handleChange }/>
-          <label>Purchase Price:</label>
-          <input name='purchasePrice' onChange={ this.handleChange }/>
-          <label>Cash Down:</label>
-          <input name='cashDown' onChange={ this.handleChange }/>
+          <br/>
+            <label>Name:</label>
+            <input name='name' onChange={ this.handleChange }/>
+          <br/>
+            <label>Purchase Price:</label>
+            <input name='purchasePrice' onChange={ this.handleChange }/>
+          <br/>
+            <label>Cash Down:</label>
+            <input name='cashDown' onChange={ this.handleChange }/>
           {
             this.state.calc === 'tradein' &&
-            <div>
+            <div className='conditional'>
               <label>Trade-in</label>
               <select onChange={ this.tradeInChange }>
                 <option value="">Select One</option>
                 {options}
               </select>
+              <b>Trade-In Value:</b> ${this.state.tradeInValue}
+              <b>Payoff:</b> ${this.state.payoff}
             </div>
           }
           {
             this.state.calc ==='privatesale' &&
-          <div>
+          <div className='conditional'>
             <label>Private Sale</label>
             <select onChange={ this.privateSaleChange } >
               <option value="">Select One</option>
               {options}
             </select>
+            <b>Private Sale Value:</b> ${ this.state.privateSale }
+            <b>Payoff:</b> ${ this.state.payoff }
           </div>
           }
-          <label>Tax Rate: </label>
-          <input name='taxRate' onChange={this.handleChange}/>
-          <label>Annual Interest Rate</label>
-          <input name='interest' onChange={ this.handleChange }/>
-          <label>Loan Term (in months):</label>
-          <input name='payments' onChange={ this.handleChange }/>
-          <button onClick={ this.handleCalculate }>Calculate</button>
-          <label>Loan Amount:</label>
-          { this.state.amount }
-          <label>Monthly Payment:</label>
-          { this.state.monthly }
-          <button onClick={ this.saveLoan }>Save</button>
+          <br/>
+            <label>Tax Rate: </label>
+            <input name='taxRate' onChange={this.handleChange}/>
+          <br/>
+            <label>Annual Interest Rate</label>
+            <input name='interest' onChange={ this.handleChange }/>
+          <br/>
+            <label>Loan Term (in months):</label>
+            <input name='payments' onChange={ this.handleChange }/>
+          <br/>
+          </div>
+          <div className='calculate'>
+            <button onClick={ this.handleCalculate }>Calculate</button>
+          </div>
+          <div className='calc-results'>
+            <label>Loan Amount:</label>
+            ${ this.state.amount }
+            <label>Monthly Payment:</label>
+            ${ this.state.monthly }
+          </div>
+          <div className='save'>
+            <button onClick={ this.saveLoan }>Save</button>
+          </div>  
       </div>
     );
   }

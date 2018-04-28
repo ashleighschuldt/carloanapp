@@ -1,0 +1,12 @@
+.username {
+    width: 100%;
+    background: #64CBE0;
+    padding: 5px 15px;
+    font-size: 22px;
+}
+.dashboard {
+    padding: 5px 15px;
+    margin: 10px auto;
+    width: 60%;
+    text-align: center;
+}

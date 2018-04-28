@@ -1,0 +1,16 @@
+.vehicle {
+    border: 1px solid black;
+    display: flex;
+    justify-content: space-around;
+    margin: 2vh auto;
+    padding: 10px 10px;
+    width: 90%;
+    font-size: 18px;
+}
+.newvehicle {
+    width: 95%;
+    height: 20vh;
+    margin: 10px auto;
+    display: flex;
+    justify-content: center;
+}

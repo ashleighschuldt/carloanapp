@@ -38,7 +38,7 @@ class Login extends Component {
 
   render() {
     return (
-      <div > <h1>Car Loan App</h1>
+      <div > <h1 className='Login'>Car Loan App</h1>
       <div className='Login'>
           <label>Username:</label>
           <input name='username' onChange={ this.handleChange }/>

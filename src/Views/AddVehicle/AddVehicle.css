@@ -1,0 +1,12 @@
+.button-div {
+    width: 95%;
+    display: flex;
+    margin: 2vh auto;
+    justify-content: center;
+}
+.addvehicle {
+    width: 95%;
+    margin: 2vh auto;
+    padding: 5px 10px;
+    text-align: center;
+}

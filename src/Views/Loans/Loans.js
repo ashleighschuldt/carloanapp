@@ -35,21 +35,24 @@ class Loans extends Component {
 
   render() {
     const loans = this.state.loans.map((e,i) => {
-      return (<div key={i}>
-        {this.state.loans[i].name}
-        Amount {this.state.loans[i].loan_amount}
-        Payment {this.state.loans[i].monthly_payment}
-        Term {this.state.loans[i].loan_term/12} years
+      return (<div key={i} className='loans'>
+        <b>{this.state.loans[i].name}</b>
+        <b>Amount:</b> ${this.state.loans[i].loan_amount}
+        <b>Payment:</b> ${this.state.loans[i].monthly_payment}
+        <b>{this.state.loans[i].loan_term/12} years</b>
         <button onClick={() => {this.deleteLoan(e.id)}}>Delete</button>
       </div>)
     })
     return (
       <div >
+        <div className='username'>
         { this.props.user.username }'s Loans
+        </div>
         <Header />
-          Loans
-          <Link to={`/newloan`}><button>Add New</button></Link>
           {loans}
+          <div className='newloan'>
+          <Link to={`/newloan`}><button>Add New Loan</button></Link>
+          </div>
       </div>
     );
   }
