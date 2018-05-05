@@ -1,27 +1,5 @@
 import expect from 'expect';
 
-// function tradeIn(purchasePrice, cashDown, tradeInValue, taxRate, payoff){
-//     return purchasePrice - cashDown + ((purchasePrice-tradeInValue)*taxRate/100)-(tradeInValue - payoff)
-// }
-
-// function loanPay(amount, payments, interest){
-//     return amount/((Math.pow((1+(interest/100/12)), payments)-1)/(interest/100/12*Math.pow((1+(interest/100/12)), payments)))
-// }
-// function interest(interest){
-//     return interest/100/12
-// }
-
-// console.log(interest(6))
-
-// function discount(interest, payments){
-//     return (Math.pow((1+(interest/100/12)), payments)-1)/(interest/100/12*Math.pow((1+(interest/100/12)), payments))
-// }
-
-// console.log(tradeIn(30000, 0, 25000, 6.85, 20000));
-
-// console.log(loanPay(100000, 360, 6))
-
-// console.log(discount(6,360))
 
 function noCar(purchasePrice, cashDown, taxRate){
     const amount = purchasePrice - cashDown + (purchasePrice*taxRate/100)

@@ -4,7 +4,6 @@ import './App.css';
 
 import Login from './Views/Login/Login';
 import Register from './Views/Register/Register';
-import Welcome from './Views/Welcome/Welcome';
 import Dashboard from './Views/Dashboard/Dashboard';
 import Vehicles from './Views/Vehicles/Vehicles';
 import AddVehicle from './Views/AddVehicle/AddVehicle';
@@ -20,7 +19,6 @@ class App extends Component {
         <Router>
           <Switch>
               <Route path={`/register`} component={ Register }/>
-              <Route path={`/welcome`} component={ Welcome }/>
               <Route path={`/dashboard`} component={ Dashboard }/>
               <Route path={`/vehicles`} component={ Vehicles }/>
               <Route path={`/editvehicle/:id`} component= {EditVehicle}/>

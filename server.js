@@ -10,6 +10,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const bcrpyt = require('bcrypt');
 const app = express();
 const {register} = require('./server/auth/register');
+const path = require('path');
 
 
 require('dotenv').config();
@@ -102,6 +103,7 @@ app.get(`/api/tax`, loans.getTax);
 app.post(`/api/loan`, loans.addLoan);
 app.delete(`/api/loan/:id`, loans.deleteLoan);
 
+app.use(express.static(path.join(__dirname, './build')))
 const port = process.env.PORT || 5000;
 app.listen(port, ()=>{
     console.log('this port is awesome', port)
