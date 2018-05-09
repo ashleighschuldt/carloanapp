@@ -27,7 +27,7 @@
     "redux-promise-middleware": "^5.0.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node server.js",
     "heroku-postbuild": "npm install && npm install --only=dev --no-shrinkwrap && npm run build",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
