@@ -27,7 +27,7 @@ app.use(session({
 
 
 
-massive(process.env.CONNECTION_STRING)
+massive(process.env.DATABASE_URL)
 .then(dbInstance => {
     app.set('db', dbInstance)
     console.log('db is running');
